@@ -1,6 +1,8 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from '../config/firebase';
 import { User } from '@firebase/auth-types';
+import { User as UserModel } from '../models';
+import { useCurrentUser, useUpdateCurrentUser } from './user';
 
 export const useLogin = () => {
 	return (email: string, password: string) => firebase.auth().signInWithEmailAndPassword(email, password);
@@ -11,11 +13,10 @@ export const useLogout = () => {
 };
 
 export const useSignup = () => {
-	return (email: string, password: string, admin?: boolean) =>
-		firebase.auth().createUserWithEmailAndPassword(email, password);
+	return (email: string, password: string) => firebase.auth().createUserWithEmailAndPassword(email, password);
 };
 
-export const useAuth = (): [User, boolean, Error] => useAuthState(firebase.auth());
+export const useAuth = (): [User | null, boolean, Error] => useAuthState(firebase.auth());
 
 export const useLoggedIn = () => {
 	const [auth] = useAuth();
@@ -24,7 +25,7 @@ export const useLoggedIn = () => {
 
 export const useSendPasswordResetEmail = () => {
 	const [user] = useAuth();
-	return (email?: string) => firebase.auth().sendPasswordResetEmail(email || user.email || '');
+	return (email?: string) => firebase.auth().sendPasswordResetEmail(email || user?.email || '');
 };
 
 export const useResetPassword = () => {

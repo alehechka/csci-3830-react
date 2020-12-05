@@ -41,3 +41,9 @@ export const PROFILE: Route = {
 	display: 'Profile',
 	component: HomePage,
 };
+
+export const USERS: Route = {
+	path: '/users',
+	display: 'Users',
+	component: null,
+};

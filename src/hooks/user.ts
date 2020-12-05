@@ -13,6 +13,12 @@ export const useUpdateUser = () => {
 	return (userUID: string, user: User) => updateGeneric('users', userUID, user);
 };
 
+export const useUpdateCurrentUser = () => {
+	const [auth] = useAuth();
+	const updateUser = useUpdateUser();
+	return (data: User) => updateUser(auth?.uid || '', data);
+};
+
 export const useDeleteUser = () => {
 	const deleteGeneric = useDeleteGeneric();
 	return (userUID: string) => deleteGeneric('users', userUID);
@@ -28,5 +34,10 @@ export const useUsers = () => {
 
 export const useCurrentUser = () => {
 	const [auth] = useAuth();
-	return useSelectedUser(auth.uid);
+	return useSelectedUser(auth?.uid || 'noAuth');
+};
+
+export const useIsAdmin = () => {
+	const [user] = useCurrentUser();
+	return user.admin;
 };

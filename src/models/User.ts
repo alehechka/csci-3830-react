@@ -6,4 +6,5 @@ export interface User {
 	major?: string;
 	title?: string;
 	admin: boolean;
+	id?: string;
 }
