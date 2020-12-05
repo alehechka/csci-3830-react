@@ -1,26 +1,38 @@
+import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
+import { CONFIRM_RESET_PASSWORD, HOME, LOGIN, PROFILE, RESET_PASSWORD, SIGNUP } from './constants/routes';
+import Navbar from './layouts/Navbar';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const theme = React.useMemo(
+		() =>
+			createMuiTheme({
+				palette: {
+					type: 'light', // 'dark',
+				},
+			}),
+		[]
+	);
+	return (
+		<ThemeProvider theme={theme}>
+			<BrowserRouter>
+				<Navbar />
+
+				<CssBaseline />
+				<Switch>
+					<PrivateRoute exact {...HOME} />
+					<PrivateRoute exact {...PROFILE} />
+					<Route exact {...LOGIN} />
+					<Route exact {...SIGNUP} />
+					<Route exact {...RESET_PASSWORD} />
+					<Route exact {...CONFIRM_RESET_PASSWORD} />
+					<PrivateRoute path='' />
+				</Switch>
+			</BrowserRouter>
+		</ThemeProvider>
+	);
 }
 
 export default App;
