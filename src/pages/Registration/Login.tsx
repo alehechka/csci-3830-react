@@ -1,57 +1,35 @@
-import {
-	Avatar,
-	Button,
-	Card,
-	Container,
-	CssBaseline,
-	Grid,
-	makeStyles,
-	TextField,
-	Typography,
-	Link as MuiLink,
-} from '@material-ui/core';
+import { Avatar, Button, Card, Container, Grid, TextField, Typography, Link as MuiLink } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import React from 'react';
-import { RESET_PASSWORD, SIGNUP } from '../../constants/routes';
+import { HOME, RESET_PASSWORD, SIGNUP } from '../../constants/routes';
 import { useForm } from 'react-hook-form';
-import { useLogin } from '../../hooks';
-
-const useStyles = makeStyles((theme) => ({
-	paper: {
-		marginTop: theme.spacing(25),
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		padding: '15px',
-	},
-	avatar: {
-		margin: theme.spacing(1),
-		backgroundColor: theme.palette.secondary.main,
-	},
-	form: {
-		width: '100%', // Fix IE 11 issue.
-		marginTop: theme.spacing(1),
-	},
-	submit: {
-		margin: theme.spacing(3, 0, 2),
-	},
-}));
+import { useLoggedIn, useLogin } from '../../hooks';
+import { useStyles } from '.';
 
 export const Login = () => {
 	const classes = useStyles();
-	const { register, handleSubmit, errors, formState } = useForm<{ email: string; password: string }>({
+	const location = useLocation();
+	const params = new URLSearchParams(location.search);
+	const { register, handleSubmit, errors, formState, watch } = useForm<{ email: string; password: string }>({
 		mode: 'onChange',
+		defaultValues: { email: params.get('email') || '' },
 	});
-	const login = useLogin();
+	const { email } = watch(['email']);
 
+	const login = useLogin();
+	const [submitError, setSubmitError] = React.useState<string | undefined>();
 	const handleFormSubmit = (formParams: { email: string; password: string }) => {
-		login(formParams.email, formParams.password).catch((err) => console.error(err));
+		login(formParams.email, formParams.password).catch((err) => setSubmitError(err.message));
 	};
+
+	const isLoggedIn = useLoggedIn();
+	if (isLoggedIn) {
+		return <Redirect to={HOME.path} />;
+	}
 
 	return (
 		<Container component='main' maxWidth='xs'>
-			<CssBaseline />
 			<Card className={classes.paper}>
 				<Avatar className={classes.avatar}>
 					<LockOutlinedIcon />
@@ -93,6 +71,11 @@ export const Login = () => {
 						error={Boolean(errors.password)}
 						inputRef={register({ required: true, minLength: 6 })}
 					/>
+					{submitError && (
+						<Typography color='error' align='center' variant='body2'>
+							{submitError}
+						</Typography>
+					)}
 					<Button
 						type='submit'
 						fullWidth
@@ -105,7 +88,15 @@ export const Login = () => {
 					</Button>
 					<Grid container>
 						<Grid item xs>
-							<MuiLink href='#' variant='body2' component={Link} to={RESET_PASSWORD.path}>
+							<MuiLink
+								href='#'
+								variant='body2'
+								component={Link}
+								to={{
+									pathname: RESET_PASSWORD.path,
+									search: `?email=${email}`,
+								}}
+							>
 								Forgot password?
 							</MuiLink>
 						</Grid>

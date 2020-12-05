@@ -16,6 +16,11 @@ export const useSignup = () => {
 
 export const useAuth = (): [User, boolean, Error] => useAuthState(firebase.auth());
 
+export const useLoggedIn = () => {
+	const [auth] = useAuth();
+	return Boolean(auth && auth.uid);
+};
+
 export const useSendPasswordResetEmail = () => {
 	const [user] = useAuth();
 	return (email?: string) => firebase.auth().sendPasswordResetEmail(email || user.email || '');

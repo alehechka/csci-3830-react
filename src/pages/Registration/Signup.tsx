@@ -3,42 +3,20 @@ import {
 	Button,
 	Card,
 	Container,
-	CssBaseline,
 	FormControlLabel,
 	Grid,
-	makeStyles,
 	TextField,
 	Typography,
 	Link as MuiLink,
 	Checkbox,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import React from 'react';
-import { LOGIN, RESET_PASSWORD, SIGNUP } from '../../constants/routes';
+import { HOME, LOGIN } from '../../constants/routes';
 import { useForm } from 'react-hook-form';
-import { useLogin, useSignup } from '../../hooks';
-
-const useStyles = makeStyles((theme) => ({
-	paper: {
-		marginTop: theme.spacing(25),
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		padding: '15px',
-	},
-	avatar: {
-		margin: theme.spacing(1),
-		backgroundColor: theme.palette.secondary.main,
-	},
-	form: {
-		width: '100%', // Fix IE 11 issue.
-		marginTop: theme.spacing(1),
-	},
-	submit: {
-		margin: theme.spacing(3, 0, 2),
-	},
-}));
+import { useLoggedIn, useSignup } from '../../hooks';
+import { useStyles } from '.';
 
 export const Signup = () => {
 	const classes = useStyles();
@@ -52,13 +30,18 @@ export const Signup = () => {
 	const { password } = watch(['password']);
 	const signup = useSignup();
 
+	const [submitError, setSubmitError] = React.useState<string | undefined>();
 	const handleFormSubmit = (formParams: { email: string; password: string }) => {
-		signup(formParams.email, formParams.password).catch((err) => console.error(err));
+		signup(formParams.email, formParams.password).catch((err) => setSubmitError(err.message));
 	};
+
+	const isLoggedIn = useLoggedIn();
+	if (isLoggedIn) {
+		return <Redirect to={HOME.path} />;
+	}
 
 	return (
 		<Container component='main' maxWidth='xs'>
-			<CssBaseline />
 			<Card className={classes.paper}>
 				<Avatar className={classes.avatar}>
 					<LockOutlinedIcon />
@@ -125,6 +108,11 @@ export const Signup = () => {
 						label='Administrator'
 						labelPlacement='end'
 					/>
+					{submitError && (
+						<Typography color='error' align='center' variant='body2'>
+							{submitError}
+						</Typography>
+					)}
 					<Button
 						type='submit'
 						fullWidth

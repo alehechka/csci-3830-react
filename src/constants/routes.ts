@@ -1,4 +1,4 @@
-import { Login, Signup } from '../pages';
+import { Login, Signup, HomePage, ResetPassword, SendResetPasswordEmail } from '../pages';
 
 export interface Route {
 	path: string;
@@ -20,12 +20,24 @@ export const SIGNUP: Route = {
 
 export const RESET_PASSWORD: Route = {
 	path: '/reset_password',
-	display: '/Reset Password',
-	component: null,
+	display: 'Reset Password',
+	component: SendResetPasswordEmail,
 };
 
 export const CONFIRM_RESET_PASSWORD: Route = {
 	path: '/reset_password/email',
 	display: 'Confirm Password Reset',
-	component: null,
+	component: ResetPassword,
+};
+
+export const HOME: Route = {
+	path: '/',
+	display: 'Home',
+	component: HomePage,
+};
+
+export const PROFILE: Route = {
+	path: '/profile',
+	display: 'Profile',
+	component: HomePage,
 };
