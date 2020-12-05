@@ -1,8 +1,6 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from '../config/firebase';
 import { User } from '@firebase/auth-types';
-import { User as UserModel } from '../models';
-import { useCurrentUser, useUpdateCurrentUser } from './user';
 
 export const useLogin = () => {
 	return (email: string, password: string) => firebase.auth().signInWithEmailAndPassword(email, password);

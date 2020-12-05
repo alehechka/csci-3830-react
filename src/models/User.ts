@@ -7,4 +7,5 @@ export interface User {
 	title?: string;
 	admin: boolean;
 	id?: string;
+	image?: string;
 }
