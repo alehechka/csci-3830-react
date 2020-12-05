@@ -11,7 +11,8 @@ export const useLogout = () => {
 };
 
 export const useSignup = () => {
-	return (email: string, password: string) => firebase.auth().createUserWithEmailAndPassword(email, password);
+	return (email: string, password: string, admin?: boolean) =>
+		firebase.auth().createUserWithEmailAndPassword(email, password);
 };
 
 export const useAuth = (): [User, boolean, Error] => useAuthState(firebase.auth());
