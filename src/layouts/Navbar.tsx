@@ -15,7 +15,7 @@ import {
 	useMediaQuery,
 	withStyles,
 } from '@material-ui/core';
-import { AccountCircle, Menu as MenuIcon } from '@material-ui/icons';
+import { AccountCircle, Menu as MenuIcon, GitHub } from '@material-ui/icons';
 import clsx from 'clsx';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -121,6 +121,9 @@ const AuthToolbar = ({ xsDown }: AuthToolbarProps) => {
 							</MenuItem>
 							<SignOutMenuItem />
 						</StyledMenu>
+						<IconButton color='inherit' onClick={() => window.open('https://github.com/alehechka/csci-3830-react')}>
+							<GitHub />
+						</IconButton>
 					</Grid>
 				</Grid>
 			</div>
@@ -148,6 +151,9 @@ const NoAuthToolbar = () => {
 				<Button>
 					<Typography variant='body1'>Login</Typography>
 				</Button>
+				<IconButton color='default' onClick={() => window.open('https://github.com/alehechka/csci-3830-react')}>
+					<GitHub />
+				</IconButton>
 			</Link>
 		</Toolbar>
 	);
