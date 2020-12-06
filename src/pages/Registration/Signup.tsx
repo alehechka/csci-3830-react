@@ -1,15 +1,4 @@
-import {
-	Avatar,
-	Button,
-	Card,
-	Container,
-	FormControlLabel,
-	Grid,
-	TextField,
-	Typography,
-	Link as MuiLink,
-	Checkbox,
-} from '@material-ui/core';
+import { Avatar, Button, Card, Container, Grid, TextField, Typography, Link as MuiLink } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Link, Redirect } from 'react-router-dom';
 import React from 'react';
