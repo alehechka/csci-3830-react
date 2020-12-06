@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) =>
 				margin: theme.spacing(1),
 			},
 			flexDirection: 'column',
+			alignItems: 'center',
 		},
 		large: {
 			width: theme.spacing(20),
@@ -66,7 +67,9 @@ export const ProfileImage = () => {
 				<Avatar src={profile.image} alt={`${profile.firstName} ${profile.lastName}`} className={classes.large} />
 			</Badge>
 			<Typography component='caption' variant='body1'>
-				<b>{`${profile.firstName} ${profile.lastName}`}</b>
+				<b>
+					{profile.firstName} {profile.lastName}
+				</b>
 			</Typography>
 		</div>
 	);

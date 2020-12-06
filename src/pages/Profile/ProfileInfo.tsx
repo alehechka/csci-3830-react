@@ -31,7 +31,7 @@ const ProfileInfo = ({ profile }: { profile: User }) => {
 			<form onSubmit={handleSubmit(handleUpdateSubmit)}>
 				<CardContent>
 					<Grid container justify='space-evenly' spacing={2}>
-						<Grid item xs={6}>
+						<Grid item xs={12} sm={6}>
 							<TextField
 								variant='outlined'
 								margin='normal'
@@ -45,7 +45,7 @@ const ProfileInfo = ({ profile }: { profile: User }) => {
 								})}
 							/>
 						</Grid>
-						<Grid item xs={6}>
+						<Grid item xs={12} sm={6}>
 							<TextField
 								variant='outlined'
 								margin='normal'
@@ -58,7 +58,7 @@ const ProfileInfo = ({ profile }: { profile: User }) => {
 								})}
 							/>
 						</Grid>
-						<Grid item xs={6}>
+						<Grid item xs={12} sm={6}>
 							<TextField
 								variant='outlined'
 								margin='normal'
@@ -68,7 +68,7 @@ const ProfileInfo = ({ profile }: { profile: User }) => {
 								inputRef={register({})}
 							/>
 						</Grid>
-						<Grid item xs={6}>
+						<Grid item xs={12} sm={6}>
 							<TextField
 								variant='outlined'
 								margin='normal'
@@ -78,7 +78,7 @@ const ProfileInfo = ({ profile }: { profile: User }) => {
 								inputRef={register()}
 							/>
 						</Grid>
-						<Grid item xs={6}>
+						<Grid item xs={12} sm={6}>
 							<TextField
 								variant='outlined'
 								margin='normal'
@@ -88,7 +88,7 @@ const ProfileInfo = ({ profile }: { profile: User }) => {
 								inputRef={register()}
 							/>
 						</Grid>
-						<Grid item xs={6}>
+						<Grid item xs={12} sm={6}>
 							<TextField
 								variant='outlined'
 								margin='normal'

@@ -77,17 +77,7 @@ const AuthToolbar = ({ xsDown }: AuthToolbarProps) => {
 
 	return (
 		<Toolbar>
-			<IconButton
-				color='inherit'
-				aria-label='open drawer'
-				edge='start'
-				className={clsx(classes.menuButton && !xsDown && classes.hide)}
-			>
-				<MenuIcon />
-			</IconButton>
-
-			{/* TODO: Switch this for Logo */}
-			<Header />
+			<Header xsDown={xsDown} />
 
 			<div>
 				<Grid container spacing={2} alignItems='center'>
@@ -159,16 +149,13 @@ const NoAuthToolbar = () => {
 	);
 };
 
-const Header = () => {
+const Header = ({ xsDown }: { xsDown?: boolean }) => {
 	const classes = useStyles();
 	return (
 		<>
-			{/* TODO: Switch this for Logo */}
 			<Typography variant='h5' className={classes.title} noWrap>
 				<Link href={HOME.path} component={NavLink} to={LOGIN.path}>
-					<Button>
-						<Typography variant='h5'>CSCI-3830 Final</Typography>
-					</Button>
+					<Button>{!xsDown && <Typography variant='h5'>CSCI-3830 Final</Typography>}</Button>
 				</Link>
 			</Typography>
 		</>

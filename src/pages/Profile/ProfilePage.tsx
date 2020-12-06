@@ -14,11 +14,11 @@ export const ProfilePage = () => {
 				<Loading />
 			) : (
 				<CardContent>
-					<Grid container>
-						<Grid item xs={3}>
+					<Grid container direction='row' justify='center'>
+						<Grid item sm={4} md={3}>
 							<ProfileImage />
 						</Grid>
-						<Grid item xs={9}>
+						<Grid item sm={12} md={9}>
 							<ProfileInfo profile={profile} />
 						</Grid>
 					</Grid>
