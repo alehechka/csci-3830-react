@@ -101,7 +101,15 @@ export const Login = () => {
 							</MuiLink>
 						</Grid>
 						<Grid item>
-							<MuiLink href='#' variant='body2' component={Link} to={SIGNUP.path}>
+							<MuiLink
+								href='#'
+								variant='body2'
+								component={Link}
+								to={{
+									pathname: SIGNUP.path,
+									search: `?email=${email}`,
+								}}
+							>
 								{"Don't have an account? Sign Up"}
 							</MuiLink>
 						</Grid>

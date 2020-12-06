@@ -1,6 +1,6 @@
 import { Avatar, Button, Card, Container, Grid, TextField, Typography, Link as MuiLink } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import React from 'react';
 import { HOME, LOGIN } from '../../constants/routes';
 import { useForm } from 'react-hook-form';
@@ -9,12 +9,17 @@ import { useStyles } from '.';
 
 export const Signup = () => {
 	const classes = useStyles();
+	const location = useLocation();
+	const params = new URLSearchParams(location.search);
 	const { register, handleSubmit, errors, watch, formState } = useForm<{
 		email: string;
 		password: string;
 		confirmPassword: string;
 	}>({
 		mode: 'onChange',
+		defaultValues: {
+			email: params.get('email') || '',
+		},
 	});
 	const { password } = watch(['password']);
 	const signup = useSignup();

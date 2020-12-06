@@ -15,8 +15,7 @@ import {
 	useMediaQuery,
 	withStyles,
 } from '@material-ui/core';
-import { AccountCircle, Menu as MenuIcon, GitHub } from '@material-ui/icons';
-import clsx from 'clsx';
+import { AccountCircle, GitHub } from '@material-ui/icons';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useCurrentUser, useLoggedIn, useLogout } from '../hooks';
