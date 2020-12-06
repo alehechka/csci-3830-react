@@ -2,7 +2,7 @@ import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
-import { CONFIRM_RESET_PASSWORD, HOME, LOGIN, PROFILE, RESET_PASSWORD, SIGNUP } from './constants/routes';
+import { CONFIRM_RESET_PASSWORD, HOME, LOGIN, PROFILE, RESET_PASSWORD, SIGNUP, USERS } from './constants/routes';
 import { useStyles } from './layouts/LayoutStyles';
 import Navbar from './layouts/Navbar';
 
@@ -29,6 +29,7 @@ function App() {
 					<Switch>
 						<PrivateRoute exact {...HOME} />
 						<PrivateRoute exact {...PROFILE} />
+						<PrivateRoute exact {...USERS} />
 						<Route exact {...LOGIN} />
 						<Route exact {...SIGNUP} />
 						<Route exact {...RESET_PASSWORD} />

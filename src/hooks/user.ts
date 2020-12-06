@@ -1,4 +1,4 @@
-import { useCreateGeneric, useDeleteGeneric, useUpdateGeneric } from './generics';
+import { useCreateGeneric, useDeleteGeneric, useUpdateGeneric, useUploadImage } from './generics';
 import { useCollection, useDocument } from './queries';
 import { User } from '../models';
 import { useAuth } from './auth';
@@ -37,7 +37,14 @@ export const useCurrentUser = () => {
 	return useSelectedUser(auth?.uid || 'noAuth');
 };
 
-export const useIsAdmin = () => {
-	const [user] = useCurrentUser();
-	return user.admin;
+export const useIsAdmin = (): [boolean, boolean, Error | undefined] => {
+	const [user, loading, error] = useCurrentUser();
+	return [Boolean(user?.admin), loading, error];
+};
+
+export const useUploadProfileImage = () => {
+	const uploadImage = useUploadImage();
+	const updateUser = useUpdateCurrentUser();
+	return (fileName: string, image: File) =>
+		uploadImage(fileName, image).then((url: string) => updateUser({ image: url }));
 };

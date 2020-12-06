@@ -25,3 +25,13 @@ export const useDeleteGeneric = () => {
 	return (collection: string, documentUID: string) =>
 		firebase.firestore().collection(collection).doc(documentUID).delete();
 };
+
+export const useUploadImage = () => {
+	return (fileName: string, image: File) =>
+		firebase
+			.storage()
+			.ref()
+			.child(fileName)
+			.put(image)
+			.then((snapshot) => snapshot.ref.getDownloadURL());
+};

@@ -1,4 +1,4 @@
-import { Login, Signup, HomePage, ResetPassword, SendResetPasswordEmail, ProfilePage } from '../pages';
+import { Login, Signup, HomePage, ResetPassword, SendResetPasswordEmail, ProfilePage, UsersPage } from '../pages';
 
 export interface Route {
 	path: string;
@@ -45,5 +45,5 @@ export const PROFILE: Route = {
 export const USERS: Route = {
 	path: '/users',
 	display: 'Users',
-	component: null,
+	component: UsersPage,
 };

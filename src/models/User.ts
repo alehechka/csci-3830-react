@@ -5,7 +5,7 @@ export interface User {
 	number?: number;
 	major?: string;
 	title?: string;
-	admin: boolean;
+	admin?: boolean;
 	id?: string;
 	image?: string;
 }
