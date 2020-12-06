@@ -11,11 +11,10 @@ export const useLogout = () => {
 };
 
 export const useSignup = () => {
-	return (email: string, password: string, admin?: boolean) =>
-		firebase.auth().createUserWithEmailAndPassword(email, password);
+	return (email: string, password: string) => firebase.auth().createUserWithEmailAndPassword(email, password);
 };
 
-export const useAuth = (): [User, boolean, Error] => useAuthState(firebase.auth());
+export const useAuth = (): [User | null, boolean, Error] => useAuthState(firebase.auth());
 
 export const useLoggedIn = () => {
 	const [auth] = useAuth();
@@ -24,7 +23,7 @@ export const useLoggedIn = () => {
 
 export const useSendPasswordResetEmail = () => {
 	const [user] = useAuth();
-	return (email?: string) => firebase.auth().sendPasswordResetEmail(email || user.email || '');
+	return (email?: string) => firebase.auth().sendPasswordResetEmail(email || user?.email || '');
 };
 
 export const useResetPassword = () => {

@@ -103,11 +103,6 @@ export const Signup = () => {
 							validate: { matches: (value) => value === password },
 						})}
 					/>
-					<FormControlLabel
-						control={<Checkbox name='admin' inputRef={register} />}
-						label='Administrator'
-						labelPlacement='end'
-					/>
 					{submitError && (
 						<Typography color='error' align='center' variant='body2'>
 							{submitError}

@@ -19,7 +19,7 @@ import { AccountCircle, Menu as MenuIcon } from '@material-ui/icons';
 import clsx from 'clsx';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useLoggedIn, useLogout } from '../hooks';
+import { useCurrentUser, useLoggedIn, useLogout } from '../hooks';
 import { useStyles } from './LayoutStyles';
 import { Link as NavLink } from 'react-router-dom';
 import { LOGIN, PROFILE, HOME, RESET_PASSWORD } from '../constants/routes';
@@ -61,7 +61,7 @@ interface AuthToolbarProps {
 }
 
 const AuthToolbar = ({ xsDown }: AuthToolbarProps) => {
-	// const [user] = useCurrentUser();
+	const [user] = useCurrentUser();
 	const classes = useStyles();
 	const history = useHistory();
 
@@ -94,8 +94,7 @@ const AuthToolbar = ({ xsDown }: AuthToolbarProps) => {
 					<Grid item>
 						<Hidden xsDown>
 							<Typography variant='body1' className={classes.title}>
-								{/* {user?.firstName && 'Welcome, ' + user?.firstName} */}
-								Welcome
+								{user?.firstName ? `Welcome, ${user.firstName}` : 'Welcome'}
 							</Typography>
 						</Hidden>
 					</Grid>

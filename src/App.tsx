@@ -2,7 +2,8 @@ import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
-import { CONFIRM_RESET_PASSWORD, HOME, LOGIN, PROFILE, RESET_PASSWORD, SIGNUP } from './constants/routes';
+import { CONFIRM_RESET_PASSWORD, HOME, LOGIN, PROFILE, RESET_PASSWORD, SIGNUP, USERS } from './constants/routes';
+import { useStyles } from './layouts/LayoutStyles';
 import Navbar from './layouts/Navbar';
 
 function App() {
@@ -15,21 +16,27 @@ function App() {
 			}),
 		[]
 	);
+
+	const styles = useStyles();
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
 				<Navbar />
 
 				<CssBaseline />
-				<Switch>
-					<PrivateRoute exact {...HOME} />
-					<PrivateRoute exact {...PROFILE} />
-					<Route exact {...LOGIN} />
-					<Route exact {...SIGNUP} />
-					<Route exact {...RESET_PASSWORD} />
-					<Route exact {...CONFIRM_RESET_PASSWORD} />
-					<PrivateRoute path='' />
-				</Switch>
+				<main className={styles.content}>
+					<div className={styles.drawerHeader} />
+					<Switch>
+						<PrivateRoute exact {...HOME} />
+						<PrivateRoute exact {...PROFILE} />
+						<PrivateRoute exact {...USERS} />
+						<Route exact {...LOGIN} />
+						<Route exact {...SIGNUP} />
+						<Route exact {...RESET_PASSWORD} />
+						<Route exact {...CONFIRM_RESET_PASSWORD} />
+						<PrivateRoute path='' />
+					</Switch>
+				</main>
 			</BrowserRouter>
 		</ThemeProvider>
 	);
